@@ -1,0 +1,454 @@
+{
+  "project": "did-verifiable-credentials-sdk",
+  "description": "A Go SDK for interacting with Decentralized Identifier (DID) based Verifiable Credentials (VC) on the blockchain, providing factory, base NFT, and storage management capabilities.",
+  "packages": {
+    "vcfactory": {
+      "purpose": "Factory for issuing, burning, and managing verifiable credentials (Identity and Certificate types).",
+      "exported_types": [
+        {
+          "name": "VCFactory",
+          "purpose": "Main factory instance for communicating with the VC factory smart contract.",
+          "methods": [
+            {
+              "name": "GetAddress",
+              "description": "Returns the contract address.",
+              "args": [],
+              "returns": ["utils.Address"]
+            },
+            {
+              "name": "GetBlockchain",
+              "description": "Returns the blockchain instance.",
+              "args": [],
+              "returns": ["*blockchain.Blockchain"]
+            },
+            {
+              "name": "GetIdentityNFT",
+              "description": "Returns the address of the Identity NFT contract.",
+              "args": [
+                { "name": "ctx", "type": "context.Context" }
+              ],
+              "returns": ["utils.Address", "error"]
+            },
+            {
+              "name": "GetCertificateNFT",
+              "description": "Returns the address of the Certificate NFT contract.",
+              "args": [
+                { "name": "ctx", "type": "context.Context" }
+              ],
+              "returns": ["utils.Address", "error"]
+            },
+            {
+              "name": "GetIdentityTokenIds",
+              "description": "Retrieves identity token IDs for a given DID.",
+              "args": [
+                { "name": "ctx", "type": "context.Context" },
+                { "name": "did", "type": "[32]byte" },
+                { "name": "offset", "type": "*big.Int" },
+                { "name": "limit", "type": "*big.Int" }
+              ],
+              "returns": ["*TokenIdsResult", "error"]
+            },
+            {
+              "name": "GetCertificateTokenIds",
+              "description": "Retrieves certificate token IDs for a given DID.",
+              "args": [
+                { "name": "ctx", "type": "context.Context" },
+                { "name": "did", "type": "[32]byte" },
+                { "name": "offset", "type": "*big.Int" },
+                { "name": "limit", "type": "*big.Int" }
+              ],
+              "returns": ["*TokenIdsResult", "error"]
+            },
+            {
+              "name": "IssueCredential",
+              "description": "Issues a new credential.",
+              "args": [
+                { "name": "ctx", "type": "context.Context" },
+                { "name": "wallet", "type": "*wallet.Wallet" },
+                { "name": "params", "type": "IssueCredentialParams" },
+                { "name": "multipleRPCCalls", "type": "bool" }
+              ],
+              "returns": ["[]string", "error"]
+            },
+            {
+              "name": "BurnCredential",
+              "description": "Burns a credential.",
+              "args": [
+                { "name": "ctx", "type": "context.Context" },
+                { "name": "wallet", "type": "*wallet.Wallet" },
+                { "name": "params", "type": "BurnCredentialParams" },
+                { "name": "multipleRPCCalls", "type": "bool" }
+              ],
+              "returns": ["[]string", "error"]
+            },
+            {
+              "name": "UpdateMetadata",
+              "description": "Updates credential metadata.",
+              "args": [
+                { "name": "ctx", "type": "context.Context" },
+                { "name": "wallet", "type": "*wallet.Wallet" },
+                { "name": "params", "type": "UpdateMetadataParams" },
+                { "name": "multipleRPCCalls", "type": "bool" }
+              ],
+              "returns": ["[]string", "error"]
+            },
+            {
+              "name": "RevokeCredential",
+              "description": "Revokes a credential.",
+              "args": [
+                { "name": "ctx", "type": "context.Context" },
+                { "name": "wallet", "type": "*wallet.Wallet" },
+                { "name": "params", "type": "RevokeCredentialParams" },
+                { "name": "multipleRPCCalls", "type": "bool" }
+              ],
+              "returns": ["[]string", "error"]
+            },
+            {
+              "name": "ApproveCredentialOrg",
+              "description": "Approves a credential by an organization.",
+              "args": [
+                { "name": "ctx", "type": "context.Context" },
+                { "name": "wallet", "type": "*wallet.Wallet" },
+                { "name": "params", "type": "ApproveCredentialOrgParams" },
+                { "name": "multipleRPCCalls", "type": "bool" }
+              ],
+              "returns": ["[]string", "error"]
+            },
+            {
+              "name": "ApproveCredential",
+              "description": "Approves a credential.",
+              "args": [
+                { "name": "ctx", "type": "context.Context" },
+                { "name": "wallet", "type": "*wallet.Wallet" },
+                { "name": "params", "type": "ApproveCredentialParams" },
+                { "name": "multipleRPCCalls", "type": "bool" }
+              ],
+              "returns": ["[]string", "error"]
+            }
+          ]
+        },
+        { "name": "Options", "purpose": "Credential type enumerator (Identity or Certificate).", "methods": [] },
+        { "name": "IssueCredentialParams", "purpose": "Parameters for issuing a new credential.", "methods": [{ "name": "ToArgs", "description": "Converts parameters to a slice of arguments for smart contract call.", "args": [], "returns": ["[]any"] }] },
+        { "name": "BurnCredentialParams", "purpose": "Parameters for burning an existing credential.", "methods": [{ "name": "ToArgs", "description": "Converts parameters to a slice of arguments for smart contract call.", "args": [], "returns": ["[]any"] }] },
+        { "name": "UpdateMetadataParams", "purpose": "Parameters for updating credential metadata.", "methods": [{ "name": "ToArgs", "description": "Converts parameters to a slice of arguments for smart contract call.", "args": [], "returns": ["[]any"] }] },
+        { "name": "RevokeCredentialParams", "purpose": "Parameters for revoking a credential.", "methods": [{ "name": "ToArgs", "description": "Converts parameters to a slice of arguments for smart contract call.", "args": [], "returns": ["[]any"] }] },
+        { "name": "ApproveCredentialOrgParams", "purpose": "Parameters for organizational approval of a credential.", "methods": [{ "name": "ToArgs", "description": "Converts parameters to a slice of arguments for smart contract call.", "args": [], "returns": ["[]any"] }] },
+        { "name": "ApproveCredentialParams", "purpose": "Parameters for user approval of a credential.", "methods": [{ "name": "ToArgs", "description": "Converts parameters to a slice of arguments for smart contract call.", "args": [], "returns": ["[]any"] }] },
+        { "name": "TokenIdsResult", "purpose": "Structure containing a list of token IDs and the total count.", "methods": [] },
+        { "name": "CredentialMetadata", "purpose": "Structure representing the metadata of a verifiable credential.", "methods": [] }
+      ],
+      "utility_functions": [
+        {
+          "name": "NewVCFactory",
+          "description": "Creates a new VCFactory instance.",
+          "args": [
+            { "name": "contractAddress", "type": "utils.Address" },
+            { "name": "contractABI", "type": "utils.ABI" },
+            { "name": "bc", "type": "*blockchain.Blockchain" },
+            { "name": "contract", "type": "*contract.Contract" }
+          ],
+          "returns": ["*VCFactory"]
+        },
+        {
+          "name": "NewVCFactoryWithHNS",
+          "description": "Creates a new VCFactory instance using HNS resolution.",
+          "args": [
+            { "name": "ctx", "type": "context.Context" },
+            { "name": "hnsURI", "type": "string" },
+            { "name": "bc", "type": "*blockchain.Blockchain" }
+          ],
+          "returns": ["(*VCFactory, error)"]
+        }
+      ],
+      "exported_constants": [
+        { "name": "Identity", "purpose": "Option value representing an Identity credential." },
+        { "name": "Certificate", "purpose": "Option value representing a Certificate credential." }
+      ]
+    },
+    "nftbase": {
+      "purpose": "Base interaction layer for NFT-based credentials.",
+      "exported_types": [
+        {
+          "name": "NFTBase",
+          "purpose": "Base instance for interacting with NFT credential contracts.",
+          "methods": [
+            {
+              "name": "GetAddress",
+              "description": "Returns the contract address.",
+              "args": [],
+              "returns": ["utils.Address"]
+            },
+            {
+              "name": "GetBlockchain",
+              "description": "Returns the blockchain instance.",
+              "args": [],
+              "returns": ["*blockchain.Blockchain"]
+            },
+            {
+              "name": "IsCredentialValid",
+              "description": "Checks if a credential is valid.",
+              "args": [
+                { "name": "ctx", "type": "context.Context" },
+                { "name": "tokenId", "type": "*big.Int" }
+              ],
+              "returns": ["(bool, error)"]
+            },
+            {
+              "name": "GetMetadata",
+              "description": "Retrieves metadata for a given token ID.",
+              "args": [
+                { "name": "ctx", "type": "context.Context" },
+                { "name": "tokenId", "type": "*big.Int" }
+              ],
+              "returns": ["(*CredentialMetadata, error)"]
+            },
+            {
+              "name": "GetCredentialsWithMetadata",
+              "description": "Retrieves metadata for a list of token IDs.",
+              "args": [
+                { "name": "ctx", "type": "context.Context" },
+                { "name": "tokenIds", "type": "[]*big.Int" }
+              ],
+              "returns": ["(*CredentialsWithMetadataResult, error)"]
+            },
+            {
+              "name": "GetUnclaimedTokenId",
+              "description": "Retrieves the unclaimed token ID hash.",
+              "args": [
+                { "name": "ctx", "type": "context.Context" },
+                { "name": "tokenId", "type": "*big.Int" }
+              ],
+              "returns": ["(utils.Hash, error)"]
+            },
+            {
+              "name": "Exists",
+              "description": "Checks if a token ID exists.",
+              "args": [
+                { "name": "ctx", "type": "context.Context" },
+                { "name": "tokenId", "type": "*big.Int" }
+              ],
+              "returns": ["(bool, error)"]
+            },
+            {
+              "name": "OwnerOf",
+              "description": "Returns the owner of a token ID.",
+              "args": [
+                { "name": "ctx", "type": "context.Context" },
+                { "name": "tokenId", "type": "*big.Int" }
+              ],
+              "returns": ["(utils.Address, error)"]
+            },
+            {
+              "name": "TotalTokensToBeClaimedByDid",
+              "description": "Returns the total number of tokens to be claimed by a DID.",
+              "args": [
+                { "name": "ctx", "type": "context.Context" },
+                { "name": "did", "type": "utils.Hash" }
+              ],
+              "returns": ["(*big.Int, error)"]
+            },
+            {
+              "name": "GetToBeClaimedTokensByDid",
+              "description": "Retrieves token IDs to be claimed by a DID.",
+              "args": [
+                { "name": "ctx", "type": "context.Context" },
+                { "name": "did", "type": "utils.Hash" },
+                { "name": "offset", "type": "*big.Int" },
+                { "name": "limit", "type": "*big.Int" }
+              ],
+              "returns": ["([]*big.Int, error)"]
+            },
+            {
+              "name": "IsApprovedForAll",
+              "description": "Checks if an operator is approved for all tokens of an owner.",
+              "args": [
+                { "name": "ctx", "type": "context.Context" },
+                { "name": "owner", "type": "utils.Address" },
+                { "name": "operator", "type": "utils.Address" }
+              ],
+              "returns": ["(bool, error)"]
+            }
+          ]
+        },
+        { "name": "MintParams", "purpose": "Parameters for minting a credential NFT.", "methods": [{ "name": "ToArgs", "description": "Converts parameters to a slice of arguments for smart contract call.", "args": [], "returns": ["[]any"] }] },
+        { "name": "BurnParams", "purpose": "Parameters for burning a credential NFT.", "methods": [{ "name": "ToArgs", "description": "Converts parameters to a slice of arguments for smart contract call.", "args": [], "returns": ["[]any"] }] },
+        { "name": "SetMetadataParams", "purpose": "Parameters for setting metadata on a token.", "methods": [{ "name": "ToArgs", "description": "Converts parameters to a slice of arguments for smart contract call.", "args": [], "returns": ["[]any"] }] },
+        { "name": "TransferFromParams", "purpose": "Parameters for transferring a token.", "methods": [{ "name": "ToArgs", "description": "Converts parameters to a slice of arguments for smart contract call.", "args": [], "returns": ["[]any"] }] },
+        { "name": "AddTokenToDIDParams", "purpose": "Parameters for associating a token with a DID.", "methods": [{ "name": "ToArgs", "description": "Converts parameters to a slice of arguments for smart contract call.", "args": [], "returns": ["[]any"] }] },
+        { "name": "RemoveTokenFromDIDParams", "purpose": "Parameters for deassociating a token from a DID.", "methods": [{ "name": "ToArgs", "description": "Converts parameters to a slice of arguments for smart contract call.", "args": [], "returns": ["[]any"] }] },
+        { "name": "CredentialMetadata", "purpose": "Structure representing the metadata of an NFT credential.", "methods": [] },
+        { "name": "CredentialsWithMetadataResult", "purpose": "Structure containing token IDs and their corresponding metadata.", "methods": [] }
+      ],
+      "utility_functions": [
+        {
+          "name": "NewNFTBase",
+          "description": "Creates a new NFTBase instance.",
+          "args": [
+            { "name": "contractAddress", "type": "utils.Address" },
+            { "name": "contractABI", "type": "utils.ABI" },
+            { "name": "bc", "type": "*blockchain.Blockchain" },
+            { "name": "contract", "type": "*contract.Contract" }
+          ],
+          "returns": ["*NFTBase"]
+        },
+        {
+          "name": "NewNFTBaseWithHNS",
+          "description": "Creates a new NFTBase instance using HNS resolution.",
+          "args": [
+            { "name": "ctx", "type": "context.Context" },
+            { "name": "hnsURI", "type": "string" },
+            { "name": "bc", "type": "*blockchain.Blockchain" }
+          ],
+          "returns": ["(*NFTBase, error)"]
+        }
+      ],
+      "exported_constants": []
+    },
+    "vcstorage": {
+      "purpose": "Management of verifiable credential storage on-chain.",
+      "exported_types": [
+        {
+          "name": "VCStorage",
+          "purpose": "Main instance for communicating with the VC storage smart contract.",
+          "methods": [
+            {
+              "name": "GetAddress",
+              "description": "Returns the contract address.",
+              "args": [],
+              "returns": ["utils.Address"]
+            },
+            {
+              "name": "GetBlockchain",
+              "description": "Returns the blockchain instance.",
+              "args": [],
+              "returns": ["*blockchain.Blockchain"]
+            },
+            {
+              "name": "GetIdentityTokenCount",
+              "description": "Returns the number of identity tokens for a DID.",
+              "args": [
+                { "name": "ctx", "type": "context.Context" },
+                { "name": "did", "type": "[32]byte" }
+              ],
+              "returns": ["*big.Int", "error"]
+            },
+            {
+              "name": "GetCertificateTokenCount",
+              "description": "Returns the number of certificate tokens for a DID.",
+              "args": [
+                { "name": "ctx", "type": "context.Context" },
+                { "name": "did", "type": "[32]byte" }
+              ],
+              "returns": ["*big.Int", "error"]
+            },
+            {
+              "name": "GetIdentityTokenIds",
+              "description": "Retrieves identity token IDs for a given DID.",
+              "args": [
+                { "name": "ctx", "type": "context.Context" },
+                { "name": "did", "type": "[32]byte" },
+                { "name": "offset", "type": "*big.Int" },
+                { "name": "limit", "type": "*big.Int" }
+              ],
+              "returns": ["*TokenIdsResult", "error"]
+            },
+            {
+              "name": "GetCertificateTokenIds",
+              "description": "Retrieves certificate token IDs for a given DID.",
+              "args": [
+                { "name": "ctx", "type": "context.Context" },
+                { "name": "did", "type": "[32]byte" },
+                { "name": "offset", "type": "*big.Int" },
+                { "name": "limit", "type": "*big.Int" }
+              ],
+              "returns": ["*TokenIdsResult", "error"]
+            },
+            {
+              "name": "GetDIDRootStorage",
+              "description": "Returns the address of the DID root storage.",
+              "args": [
+                { "name": "ctx", "type": "context.Context" }
+              ],
+              "returns": ["utils.Address", "error"]
+            },
+            {
+              "name": "GetDIDOrgStorage",
+              "description": "Returns the address of the DID organization storage.",
+              "args": [
+                { "name": "ctx", "type": "context.Context" }
+              ],
+              "returns": ["utils.Address", "error"]
+            },
+            {
+              "name": "SetDidRootStorage",
+              "description": "Sets the DID root storage address.",
+              "args": [
+                { "name": "ctx", "type": "context.Context" },
+                { "name": "wallet", "type": "*wallet.Wallet" },
+                { "name": "params", "type": "SetAddressParams" },
+                { "name": "multipleRPCCalls", "type": "bool" }
+              ],
+              "returns": ["[]string", "error"]
+            },
+            {
+              "name": "SetDidOrgStorage",
+              "description": "Sets the DID organization storage address.",
+              "args": [
+                { "name": "ctx", "type": "context.Context" },
+                { "name": "wallet", "type": "*wallet.Wallet" },
+                { "name": "params", "type": "SetAddressParams" },
+                { "name": "multipleRPCCalls", "type": "bool" }
+              ],
+              "returns": ["[]string", "error"]
+            }
+          ]
+        },
+        { "name": "TokenIdsResult", "purpose": "Structure containing a list of token IDs and the total count.", "methods": [] },
+        { "name": "SetAddressParams", "purpose": "Parameters for setting contract addresses in storage.", "methods": [{ "name": "ToArgs", "description": "Converts parameters to a slice of arguments for smart contract call.", "args": [], "returns": ["[]any"] }] }
+      ],
+      "utility_functions": [
+        {
+          "name": "NewVCStorage",
+          "description": "Creates a new VCStorage instance.",
+          "args": [
+            { "name": "contractAddress", "type": "utils.Address" },
+            { "name": "contractABI", "type": "utils.ABI" },
+            { "name": "bc", "type": "*blockchain.Blockchain" },
+            { "name": "contract", "type": "*contract.Contract" }
+          ],
+          "returns": ["*VCStorage"]
+        },
+        {
+          "name": "NewVCStorageWithHNS",
+          "description": "Creates a new VCStorage instance using HNS resolution.",
+          "args": [
+            { "name": "ctx", "type": "context.Context" },
+            { "name": "hnsURI", "type": "string" },
+            { "name": "bc", "type": "*blockchain.Blockchain" }
+          ],
+          "returns": ["(*VCStorage, error)"]
+        }
+      ],
+      "exported_constants": []
+    },
+    "utils": {
+      "purpose": "Common utilities and internal interfaces for the SDK.",
+      "exported_types": [
+        {
+          "name": "TxParams",
+          "purpose": "Interface for transaction parameter structures that can be converted to contract arguments.",
+          "methods": [
+            {
+              "name": "ToArgs",
+              "description": "Converts the transaction parameters to a slice of arguments.",
+              "args": [],
+              "returns": ["[]any"]
+            }
+          ]
+        }
+      ],
+      "utility_functions": [],
+      "exported_constants": []
+    }
+  }
+}

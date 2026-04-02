@@ -1,4 +1,4 @@
-module github.com/meQlause/did-verifiable-credentials-sdk
+module github.com/HARA-DID/did-verifiable-credentials-sdk
 
 go 1.25.5
 

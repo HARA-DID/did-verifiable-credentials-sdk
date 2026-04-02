@@ -7,7 +7,7 @@ import (
 	"strings"
 	"math/big"
 
-	internal "github.com/meQlause/did-verifiable-credentials-sdk/utils"
+	internal "github.com/HARA-DID/did-verifiable-credentials-sdk/utils"
 
 	"github.com/meQlause/hara-core-blockchain-lib/pkg/blockchain"
 	"github.com/meQlause/hara-core-blockchain-lib/pkg/contract"
