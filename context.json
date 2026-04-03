@@ -8,7 +8,7 @@
         {
           "name": "VCFactory",
           "purpose": "Main factory instance for communicating with the VC factory smart contract.",
-          "methods": [
+          "read_methods": [
             {
               "name": "GetAddress",
               "description": "Returns the contract address.",
@@ -58,7 +58,9 @@
                 { "name": "limit", "type": "*big.Int" }
               ],
               "returns": ["*TokenIdsResult", "error"]
-            },
+            }
+          ],
+          "write_methods": [
             {
               "name": "IssueCredential",
               "description": "Issues a new credential.",
@@ -127,15 +129,15 @@
             }
           ]
         },
-        { "name": "Options", "purpose": "Credential type enumerator (Identity or Certificate).", "methods": [] },
-        { "name": "IssueCredentialParams", "purpose": "Parameters for issuing a new credential.", "methods": [{ "name": "ToArgs", "description": "Converts parameters to a slice of arguments for smart contract call.", "args": [], "returns": ["[]any"] }] },
-        { "name": "BurnCredentialParams", "purpose": "Parameters for burning an existing credential.", "methods": [{ "name": "ToArgs", "description": "Converts parameters to a slice of arguments for smart contract call.", "args": [], "returns": ["[]any"] }] },
-        { "name": "UpdateMetadataParams", "purpose": "Parameters for updating credential metadata.", "methods": [{ "name": "ToArgs", "description": "Converts parameters to a slice of arguments for smart contract call.", "args": [], "returns": ["[]any"] }] },
-        { "name": "RevokeCredentialParams", "purpose": "Parameters for revoking a credential.", "methods": [{ "name": "ToArgs", "description": "Converts parameters to a slice of arguments for smart contract call.", "args": [], "returns": ["[]any"] }] },
-        { "name": "ApproveCredentialOrgParams", "purpose": "Parameters for organizational approval of a credential.", "methods": [{ "name": "ToArgs", "description": "Converts parameters to a slice of arguments for smart contract call.", "args": [], "returns": ["[]any"] }] },
-        { "name": "ApproveCredentialParams", "purpose": "Parameters for user approval of a credential.", "methods": [{ "name": "ToArgs", "description": "Converts parameters to a slice of arguments for smart contract call.", "args": [], "returns": ["[]any"] }] },
-        { "name": "TokenIdsResult", "purpose": "Structure containing a list of token IDs and the total count.", "methods": [] },
-        { "name": "CredentialMetadata", "purpose": "Structure representing the metadata of a verifiable credential.", "methods": [] }
+        { "name": "Options", "purpose": "Credential type enumerator (Identity or Certificate).", "read_methods": [], "write_methods": [] },
+        { "name": "IssueCredentialParams", "purpose": "Parameters for issuing a new credential.", "read_methods": [{ "name": "ToArgs", "description": "Converts parameters to a slice of arguments for smart contract call.", "args": [], "returns": ["[]any"] }], "write_methods": [] },
+        { "name": "BurnCredentialParams", "purpose": "Parameters for burning an existing credential.", "read_methods": [{ "name": "ToArgs", "description": "Converts parameters to a slice of arguments for smart contract call.", "args": [], "returns": ["[]any"] }], "write_methods": [] },
+        { "name": "UpdateMetadataParams", "purpose": "Parameters for updating credential metadata.", "read_methods": [{ "name": "ToArgs", "description": "Converts parameters to a slice of arguments for smart contract call.", "args": [], "returns": ["[]any"] }], "write_methods": [] },
+        { "name": "RevokeCredentialParams", "purpose": "Parameters for revoking a credential.", "read_methods": [{ "name": "ToArgs", "description": "Converts parameters to a slice of arguments for smart contract call.", "args": [], "returns": ["[]any"] }], "write_methods": [] },
+        { "name": "ApproveCredentialOrgParams", "purpose": "Parameters for organizational approval of a credential.", "read_methods": [{ "name": "ToArgs", "description": "Converts parameters to a slice of arguments for smart contract call.", "args": [], "returns": ["[]any"] }], "write_methods": [] },
+        { "name": "ApproveCredentialParams", "purpose": "Parameters for user approval of a credential.", "read_methods": [{ "name": "ToArgs", "description": "Converts parameters to a slice of arguments for smart contract call.", "args": [], "returns": ["[]any"] }], "write_methods": [] },
+        { "name": "TokenIdsResult", "purpose": "Structure containing a list of token IDs and the total count.", "read_methods": [], "write_methods": [] },
+        { "name": "CredentialMetadata", "purpose": "Structure representing the metadata of a verifiable credential.", "read_methods": [], "write_methods": [] }
       ],
       "utility_functions": [
         {
@@ -171,7 +173,7 @@
         {
           "name": "NFTBase",
           "purpose": "Base instance for interacting with NFT credential contracts.",
-          "methods": [
+          "read_methods": [
             {
               "name": "GetAddress",
               "description": "Returns the contract address.",
@@ -268,16 +270,17 @@
               ],
               "returns": ["(bool, error)"]
             }
-          ]
+          ],
+          "write_methods": []
         },
-        { "name": "MintParams", "purpose": "Parameters for minting a credential NFT.", "methods": [{ "name": "ToArgs", "description": "Converts parameters to a slice of arguments for smart contract call.", "args": [], "returns": ["[]any"] }] },
-        { "name": "BurnParams", "purpose": "Parameters for burning a credential NFT.", "methods": [{ "name": "ToArgs", "description": "Converts parameters to a slice of arguments for smart contract call.", "args": [], "returns": ["[]any"] }] },
-        { "name": "SetMetadataParams", "purpose": "Parameters for setting metadata on a token.", "methods": [{ "name": "ToArgs", "description": "Converts parameters to a slice of arguments for smart contract call.", "args": [], "returns": ["[]any"] }] },
-        { "name": "TransferFromParams", "purpose": "Parameters for transferring a token.", "methods": [{ "name": "ToArgs", "description": "Converts parameters to a slice of arguments for smart contract call.", "args": [], "returns": ["[]any"] }] },
-        { "name": "AddTokenToDIDParams", "purpose": "Parameters for associating a token with a DID.", "methods": [{ "name": "ToArgs", "description": "Converts parameters to a slice of arguments for smart contract call.", "args": [], "returns": ["[]any"] }] },
-        { "name": "RemoveTokenFromDIDParams", "purpose": "Parameters for deassociating a token from a DID.", "methods": [{ "name": "ToArgs", "description": "Converts parameters to a slice of arguments for smart contract call.", "args": [], "returns": ["[]any"] }] },
-        { "name": "CredentialMetadata", "purpose": "Structure representing the metadata of an NFT credential.", "methods": [] },
-        { "name": "CredentialsWithMetadataResult", "purpose": "Structure containing token IDs and their corresponding metadata.", "methods": [] }
+        { "name": "MintParams", "purpose": "Parameters for minting a credential NFT.", "read_methods": [{ "name": "ToArgs", "description": "Converts parameters to a slice of arguments for smart contract call.", "args": [], "returns": ["[]any"] }], "write_methods": [] },
+        { "name": "BurnParams", "purpose": "Parameters for burning a credential NFT.", "read_methods": [{ "name": "ToArgs", "description": "Converts parameters to a slice of arguments for smart contract call.", "args": [], "returns": ["[]any"] }], "write_methods": [] },
+        { "name": "SetMetadataParams", "purpose": "Parameters for setting metadata on a token.", "read_methods": [{ "name": "ToArgs", "description": "Converts parameters to a slice of arguments for smart contract call.", "args": [], "returns": ["[]any"] }], "write_methods": [] },
+        { "name": "TransferFromParams", "purpose": "Parameters for transferring a token.", "read_methods": [{ "name": "ToArgs", "description": "Converts parameters to a slice of arguments for smart contract call.", "args": [], "returns": ["[]any"] }], "write_methods": [] },
+        { "name": "AddTokenToDIDParams", "purpose": "Parameters for associating a token with a DID.", "read_methods": [{ "name": "ToArgs", "description": "Converts parameters to a slice of arguments for smart contract call.", "args": [], "returns": ["[]any"] }], "write_methods": [] },
+        { "name": "RemoveTokenFromDIDParams", "purpose": "Parameters for deassociating a token from a DID.", "read_methods": [{ "name": "ToArgs", "description": "Converts parameters to a slice of arguments for smart contract call.", "args": [], "returns": ["[]any"] }], "write_methods": [] },
+        { "name": "CredentialMetadata", "purpose": "Structure representing the metadata of an NFT credential.", "read_methods": [], "write_methods": [] },
+        { "name": "CredentialsWithMetadataResult", "purpose": "Structure containing token IDs and their corresponding metadata.", "read_methods": [], "write_methods": [] }
       ],
       "utility_functions": [
         {
@@ -310,7 +313,7 @@
         {
           "name": "VCStorage",
           "purpose": "Main instance for communicating with the VC storage smart contract.",
-          "methods": [
+          "read_methods": [
             {
               "name": "GetAddress",
               "description": "Returns the contract address.",
@@ -378,7 +381,9 @@
                 { "name": "ctx", "type": "context.Context" }
               ],
               "returns": ["utils.Address", "error"]
-            },
+            }
+          ],
+          "write_methods": [
             {
               "name": "SetDidRootStorage",
               "description": "Sets the DID root storage address.",
@@ -403,8 +408,8 @@
             }
           ]
         },
-        { "name": "TokenIdsResult", "purpose": "Structure containing a list of token IDs and the total count.", "methods": [] },
-        { "name": "SetAddressParams", "purpose": "Parameters for setting contract addresses in storage.", "methods": [{ "name": "ToArgs", "description": "Converts parameters to a slice of arguments for smart contract call.", "args": [], "returns": ["[]any"] }] }
+        { "name": "TokenIdsResult", "purpose": "Structure containing a list of token IDs and the total count.", "read_methods": [], "write_methods": [] },
+        { "name": "SetAddressParams", "purpose": "Parameters for setting contract addresses in storage.", "read_methods": [{ "name": "ToArgs", "description": "Converts parameters to a slice of arguments for smart contract call.", "args": [], "returns": ["[]any"] }], "write_methods": [] }
       ],
       "utility_functions": [
         {
@@ -437,14 +442,15 @@
         {
           "name": "TxParams",
           "purpose": "Interface for transaction parameter structures that can be converted to contract arguments.",
-          "methods": [
+          "read_methods": [
             {
               "name": "ToArgs",
               "description": "Converts the transaction parameters to a slice of arguments.",
               "args": [],
               "returns": ["[]any"]
             }
-          ]
+          ],
+          "write_methods": []
         }
       ],
       "utility_functions": [],
