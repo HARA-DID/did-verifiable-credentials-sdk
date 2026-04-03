@@ -3,7 +3,7 @@ package vcfactory
 import (
 	"context"
 
-	"github.com/meQlause/hara-core-blockchain-lib/pkg/wallet"
+	"github.com/HARA-DID/hara-core-blockchain-lib/pkg/wallet"
 )
 
 func (vcf *VCFactory) IssueCredential(

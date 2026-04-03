@@ -5,10 +5,10 @@ import (
 	"fmt"
 	"math/big"
 
-	"github.com/meQlause/hara-core-blockchain-lib/pkg/blockchain"
-	"github.com/meQlause/hara-core-blockchain-lib/pkg/contract"
-	"github.com/meQlause/hara-core-blockchain-lib/pkg/wallet"
-	"github.com/meQlause/hara-core-blockchain-lib/utils"
+	"github.com/HARA-DID/hara-core-blockchain-lib/pkg/blockchain"
+	"github.com/HARA-DID/hara-core-blockchain-lib/pkg/contract"
+	"github.com/HARA-DID/hara-core-blockchain-lib/pkg/wallet"
+	"github.com/HARA-DID/hara-core-blockchain-lib/utils"
 
 	internal "github.com/HARA-DID/did-verifiable-credentials-sdk/utils"
 )

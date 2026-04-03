@@ -5,7 +5,7 @@ import (
 	"fmt"
 	"math/big"
 
-	"github.com/meQlause/hara-core-blockchain-lib/utils"
+	"github.com/HARA-DID/hara-core-blockchain-lib/utils"
 )
 
 func (vcs *VCStorage) GetIdentityTokenCount(
@@ -103,7 +103,6 @@ func (vcs *VCStorage) GetCertificateTokenIds(
 
 	return &tokenResult, nil
 }
-
 
 func (vcs *VCStorage) GetDIDRootStorage(ctx context.Context) (utils.Address, error) {
 	result, err := vcs.blockchain.CallContract(
